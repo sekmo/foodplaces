@@ -1,0 +1,16 @@
+<%= form_for(@restaurant, remote: false, authenticity_token: true) do |f| %>
+  <%= error_messages_for @restaurant %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+  <%= f.submit %>
+<% end %>
