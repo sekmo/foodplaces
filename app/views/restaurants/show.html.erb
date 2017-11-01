@@ -1,3 +1,19 @@
 <h1><%= @restaurant.name %></h1>
 <p><%= @restaurant.address %></p>
 <p><%= @restaurant.description %></p>
+
+
+<div class="restaurant-dishes">
+  <h2>Available dishes:</h2>
+  <ul class="restaurant-dishes-index">
+    <% @restaurant.dishes.each do |dish| %>
+    <li>
+      <span class="dish-name"><%= dish.name %></span> - <span class="dish-price">€<%= dish.price %></span> /
+      <span class="dish-type"><%= dish.dish_type %></span>
+      <% if dish.gluten_free  %>
+        / <span class="gluten-free">Gluten free</span>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+</div>

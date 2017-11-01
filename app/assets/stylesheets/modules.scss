@@ -16,3 +16,17 @@
     font-size: .85em;
   }
 }
+
+
+.restaurant-dishes {
+  margin-top: 60px;
+  &-index {
+    list-style: none;
+    padding-left: 0;
+    & > li {
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
