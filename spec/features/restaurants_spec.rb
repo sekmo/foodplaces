@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Restaurants", type: :feature do
   before do
     create(:restaurant, name: "Crusty hamburgers",
-                        description: "Hamburgers and Bagels",
+                        description: "Hamburgers and veggie Bagels",
                         address: "Mittenwalder Str. 6, 10961 Berlin")
     create(:restaurant, name: "Da Mario")
     create(:restaurant, name: "Der alte Fritz")
@@ -23,9 +23,12 @@ RSpec.feature "Restaurants", type: :feature do
     restaurant_link.click
     expect(page).to have_content "Crusty hamburgers"
     expect(page).to have_content "Mittenwalder Str. 6, 10961 Berlin"
-    expect(page).to have_content "Hamburgers and Bagels"
+    expect(page).to have_content "Hamburgers and veggie Bagels"
   end
 
   xscenario "User can see the average price of the dishes" do
+  end
+
+  xscenario "User can see in the index if the restaurant has vegan, vegetarian, or gluten-free dishes" do
   end
 end
