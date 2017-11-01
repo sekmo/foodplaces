@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :dish do
-    name "MyString"
-    price "9.99"
+    name Faker::Food.dish
+    price "10"
     gluten_free false
-    type 1
-    restaurant nil
+    type 0
+    association :restaurant
   end
 end
