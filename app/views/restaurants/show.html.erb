@@ -1,7 +1,9 @@
 <%= link_to "Back to all restaurants", restaurants_path, class: 'back-link' %>
 
-
 <h1><%= @restaurant.name %></h1>
+
+<%= link_to "Edit restaurant", edit_restaurant_path %>
+
 <p><%= @restaurant.address %></p>
 <p><%= @restaurant.description %></p>
 
