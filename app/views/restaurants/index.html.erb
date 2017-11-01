@@ -2,6 +2,11 @@
 
 <ul class="restaurant-index">
   <% @restaurants.each do |restaurant| %>
-    <li><%= restaurant.name %> - <%= restaurant.address %></li>
+    <%= link_to restaurants_show_path do %>
+      <li class="restaurant-index__restaurant">
+        <p class="restaurant-index__name"><%= restaurant.name %></p>
+        <p class="restaurant-index__description"><%= restaurant.address %></p>
+      </li>
+    <% end %>
   <% end %>
 </ul>
