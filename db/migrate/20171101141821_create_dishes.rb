@@ -4,7 +4,7 @@ class CreateDishes < ActiveRecord::Migration[5.1]
       t.string :name
       t.decimal :price
       t.boolean :gluten_free
-      t.integer :type
+      t.integer :dish_type
       t.belongs_to :restaurant, foreign_key: true
       t.timestamps
     end

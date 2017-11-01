@@ -11,3 +11,15 @@
                     address: Faker::Address.street_address + " " + Faker::Address.zip_code + " Berlin",
                     description: Faker::Lorem.paragraph)
 end
+
+Restaurant.all.each do |restaurant|
+  6.times do
+    price = (rand(100) + 60.0) / 10
+    gluten_free = [true, false].sample
+    type = ["Meat", "Vegetarian", "Vegan"].sample
+    Dish.create!(restaurant: restaurant,
+                name: Faker::Food.dish, price: price,
+                gluten_free: gluten_free,
+                dish_type: type)
+  end
+end
