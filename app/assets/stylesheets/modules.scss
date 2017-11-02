@@ -11,9 +11,16 @@
       border-bottom: 1px solid #eee;
     }
   }
-  p.restaurant-index__kitchen-type{
-    margin-bottom: 0;
+  &__name {
+    font-weight: 600;
+    margin-bottom: -10px;
+  }
+  p.restaurant-index__kitchen-type,
+  p.restaurant-index__address {
     font-size: .85em;
+  }
+  p.restaurant-index__address {
+    margin-bottom: 0;
   }
 }
 
