@@ -24,8 +24,7 @@
   }
 }
 
-.new_restaurant,
-.edit_restaurant, {
+.restaurant-form {
   .field {
     margin-bottom: 10px;
   }
@@ -48,6 +47,11 @@
       border-bottom: 1px solid #eee;
     }
   }
+}
+
+
+.dish-form {
+  margin-bottom: 20px;
 }
 
 
