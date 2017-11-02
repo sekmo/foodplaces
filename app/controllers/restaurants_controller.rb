@@ -26,11 +26,23 @@ class RestaurantsController < ApplicationController
   def edit
   end
 
+  def update
+    if @restaurant.update_attributes(restaurant_params)
+      flash[:notice] = "The restaurant has been updated."
+      redirect_to @restaurant
+    else
+      render "edit"
+    end
+  end
+
+
+  private
+
   def set_restaurant
     @restaurant = Restaurant.find(params[:id])
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :description, :address)
+    params.require(:restaurant).permit(:name, :kitchen_type, :address)
   end
 end

@@ -7,9 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 30.times do
+  kitchen_type = ["Indian", "Vietnamese", "Pizza", "Japanese", "German", "Japanese-Chinese fusion"].sample
   Restaurant.create(name: Faker::Book.title,
                     address: Faker::Address.street_address + " " + Faker::Address.zip_code + " Berlin",
-                    description: Faker::Lorem.paragraph)
+                    kitchen_type: kitchen_type)
 end
 
 Restaurant.all.each do |restaurant|

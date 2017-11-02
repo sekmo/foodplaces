@@ -5,8 +5,7 @@ A Rails app for managing your favorite restaurants.
 # Current status
 
 At the moment we have the Restaurant and Dish model.
-The Restaurant has a name, an address and a description,
-which can be used to store the speciality of the restaurant.
+The Restaurant has a name, an address and a kitchen type (japanese, italian, vietnamese...).
 
 The Dish model has:
 - restaurant_id
