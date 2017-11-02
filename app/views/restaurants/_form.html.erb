@@ -19,15 +19,10 @@
   <% if @restaurant.dishes.any? %>
     <h2>Dishes</h2>
     <%= restaurant_form.fields_for :dishes do |dish_fields| %>
-      <div class="dish-form">
-        <%= dish_fields.text_field :name, placeholder: "New dish" %>
-        <%= dish_fields.label :price %>
-        <%= dish_fields.text_field :price %>
-        <%= dish_fields.check_box :gluten_free %>
-        <%= dish_fields.label :gluten_free %>
-      </div>
+      <%= render "dish_fields", f: dish_fields %>
     <% end %>
   <% end %>
 
+  <%= link_to_add_dish(restaurant_form) %>
   <%= restaurant_form.submit %>
 <% end %>
