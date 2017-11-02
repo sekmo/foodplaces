@@ -1,24 +1,31 @@
 <%= form_for(@restaurant, remote: false, authenticity_token: true) do |restaurant_form| %>
   <%= error_messages_for @restaurant %>
-  <div class="field">
-    <%= restaurant_form.label :name %>
-    <%= restaurant_form.text_field :name %>
+
+  <div class="restaurant-form">
+    <div class="field">
+      <%= restaurant_form.label :name %>
+      <%= restaurant_form.text_field :name %>
+    </div>
+    <div class="field">
+      <%= restaurant_form.label :address %>
+      <%= restaurant_form.text_field :address %>
+    </div>
+    <div class="field">
+      <%= restaurant_form.label :kitchen_type, "Kitchen" %>
+      <%= restaurant_form.text_field :kitchen_type %>
+    </div>
   </div>
-  <div class="field">
-    <%= restaurant_form.label :address %>
-    <%= restaurant_form.text_field :address %>
-  </div>
-  <div class="field">
-    <%= restaurant_form.label :kitchen_type, "Kitchen" %>
-    <%= restaurant_form.text_field :kitchen_type %>
-  </div>
+
 
   <h2>Dishes</h2>
-
   <%= restaurant_form.fields_for :dishes do |dish_fields| %>
-    <%= dish_fields.text_field :name %>
-    <%= dish_fields.text_field :price %>
-    <%#= dish_fields.select :dish_type %>
+    <div class="dish-form">
+      <%= dish_fields.text_field :name, placeholder: "New dish" %>
+      <%= dish_fields.label :price %>
+      <%= dish_fields.text_field :price %>
+      <%= dish_fields.check_box :gluten_free %>
+      <%= dish_fields.label :gluten_free %>
+    </div>
   <% end %>
 
   <%= restaurant_form.submit %>

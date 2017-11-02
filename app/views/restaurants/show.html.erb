@@ -9,7 +9,7 @@
 <div class="restaurant-dishes">
   <h2>Available dishes:</h2>
   <ul class="restaurant-dishes-index">
-    <% @restaurant.dishes.each do |dish| %>
+    <% @restaurant.dishes.order(:name).each do |dish| %>
     <li>
       <span class="dish-name"><%= dish.name %></span> - <span class="dish-price">€<%= dish.price %></span> /
       <span class="dish-type"><%= dish.dish_type %></span>

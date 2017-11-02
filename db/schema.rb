@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102093417) do
+ActiveRecord::Schema.define(version: 20171102104121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20171102093417) do
     t.string "name"
     t.decimal "price"
     t.boolean "gluten_free"
-    t.integer "dish_type"
+    t.integer "dish_type", default: 0
     t.bigint "restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

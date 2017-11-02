@@ -10,6 +10,7 @@ class RestaurantsController < ApplicationController
 
   def new
     @restaurant = Restaurant.new
+    @restaurant.dishes.build
   end
 
   def create
@@ -24,6 +25,7 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
+    @restaurant.dishes.build
   end
 
   def update
@@ -43,6 +45,7 @@ class RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :kitchen_type, :address)
+    params.require(:restaurant).permit(:name, :kitchen_type, :address,
+                                       dishes_attributes: [:id, :name, :price, :gluten_free])
   end
 end
