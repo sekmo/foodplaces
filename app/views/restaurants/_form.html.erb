@@ -16,16 +16,17 @@
     </div>
   </div>
 
-
-  <h2>Dishes</h2>
-  <%= restaurant_form.fields_for :dishes do |dish_fields| %>
-    <div class="dish-form">
-      <%= dish_fields.text_field :name, placeholder: "New dish" %>
-      <%= dish_fields.label :price %>
-      <%= dish_fields.text_field :price %>
-      <%= dish_fields.check_box :gluten_free %>
-      <%= dish_fields.label :gluten_free %>
-    </div>
+  <% if @restaurant.dishes.any? %>
+    <h2>Dishes</h2>
+    <%= restaurant_form.fields_for :dishes do |dish_fields| %>
+      <div class="dish-form">
+        <%= dish_fields.text_field :name, placeholder: "New dish" %>
+        <%= dish_fields.label :price %>
+        <%= dish_fields.text_field :price %>
+        <%= dish_fields.check_box :gluten_free %>
+        <%= dish_fields.label :gluten_free %>
+      </div>
+    <% end %>
   <% end %>
 
   <%= restaurant_form.submit %>
