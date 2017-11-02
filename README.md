@@ -15,20 +15,6 @@ The Dish model has:
 
 # Next steps
 
-## Price scale on restaurant index
-
-It might be handy to have a helper that shows '€', '€€', or '€€€' to show how expensive the
-restaurant it. The helper will get the value from a `price_scale` method exposed by the Restaurant
-model.
-
 ## Kitchen type on dishes
 
-It would be nice to filter all the restaurants that offer vegan dishes, for example.
-We might add a `Kitchen` model (with just a name attribute), so we can have a `has_one :kitchen`
-association on the `Dish` model (it might be better to use a db table to store these values since
-we will probably want to add more kitchens).
-
-## Restaurant speciality
-
-It would be handy to have one or two type of kitchens on the restaurant index, so we might have
-a `speciality` method that we can send to the `Restaurant` model.
+It would be nice to filter all the restaurants that offer vegan dishes.
