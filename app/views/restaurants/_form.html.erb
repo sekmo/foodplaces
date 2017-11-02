@@ -1,16 +1,25 @@
-<%= form_for(@restaurant, remote: false, authenticity_token: true) do |f| %>
+<%= form_for(@restaurant, remote: false, authenticity_token: true) do |restaurant_form| %>
   <%= error_messages_for @restaurant %>
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= restaurant_form.label :name %>
+    <%= restaurant_form.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= restaurant_form.label :address %>
+    <%= restaurant_form.text_field :address %>
   </div>
   <div class="field">
-    <%= f.label :description, "Short description (viet-japanese fusion)" %>
-    <%= f.text_field :description %>
+    <%= restaurant_form.label :description, "Short description (viet-japanese fusion)" %>
+    <%= restaurant_form.text_field :description %>
   </div>
-  <%= f.submit %>
+
+  <h2>Dishes</h2>
+
+  <%= restaurant_form.fields_for :dishes do |dish_fields| %>
+    <%= dish_fields.text_field :name %>
+    <%= dish_fields.text_field :price %>
+    <%#= dish_fields.select :dish_type %>
+  <% end %>
+
+  <%= restaurant_form.submit %>
 <% end %>
