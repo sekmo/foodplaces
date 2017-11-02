@@ -11,10 +11,9 @@
   <ul class="restaurant-dishes-index">
     <% @restaurant.dishes.order(:name).each do |dish| %>
     <li>
-      <span class="dish-name"><%= dish.name %></span> - <span class="dish-price">€<%= dish.price %></span> /
-      <span class="dish-type"><%= dish.dish_type %></span>
+      <span class="dish-name"><%= dish.name %></span> - <span class="dish-price">€<%= dish.price %></span>
       <% if dish.gluten_free  %>
-        / <span class="gluten-free">Gluten free</span>
+        - <span class="gluten-free">Gluten free</span>
       <% end %>
     </li>
     <% end %>
