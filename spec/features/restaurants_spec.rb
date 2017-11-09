@@ -30,16 +30,4 @@ RSpec.feature "Restaurants", type: :feature do
     visit restaurants_path
     expect(page).to have_content "Fishes and Co."
   end
-
-  scenario "User can see the dishes of a restaurant after clicking on a restaurant on index" do
-    create(:dish, restaurant: @hamburger_restaurant, name: "Busty Burger")
-    create(:dish, restaurant: @hamburger_restaurant, name: "Mighty Bagel")
-    visit restaurants_path
-    restaurant_list_item = find("li", text: "Crusty burgers & Co.")
-    restaurant_link = restaurant_list_item.first(:xpath, ".//..")
-    restaurant_link.click
-    expect(page).to have_content "Crusty burgers & Co."
-    expect(page).to have_content "Busty Burger"
-    expect(page).to have_content "Mighty Bagel"
-  end
 end
