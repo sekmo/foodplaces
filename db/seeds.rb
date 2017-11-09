@@ -6,12 +6,32 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do
-  kitchen_type = ["Indian", "Vietnamese", "Pizza", "Japanese", "German", "Japanese-Chinese fusion"].sample
-  Restaurant.create(name: Faker::Book.title,
-                    address: Faker::Address.street_address + " " + Faker::Address.zip_code + " Berlin",
-                    kitchen_type: kitchen_type)
-end
+
+Restaurant.create(name: "Tim Raue",
+                  address: "Rudi-Dutschke-Straße 26, 10969 Berlin",
+                  kitchen_type: "Asian fusion")
+
+Restaurant.create(name: "Madang Restauran",
+                  address: "Gneisenaustraße 8, 10961 Berlin",
+                  kitchen_type: "Korean")
+
+Restaurant.create(name: "Facil",
+                  address: "Potsdamer Straße 3, 10785 Berlin",
+                  kitchen_type: "French")
+
+Restaurant.create(name: "Baraka",
+                  address: "Lausitzer Pl. 6, 10997 Berlin",
+                  kitchen_type: "Egiptian")
+
+Restaurant.create(name: "Monsieur Vuong",
+                  address: "Rudi-Dutschke-Straße 26, 10969 Berlin",
+                  kitchen_type: "Vietnamese")
+
+Restaurant.create(name: "Yogi",
+                  address: "Rochstraße 5, 10178 Berlin",
+                  kitchen_type: "Vietnamese")
+
+
 
 Restaurant.all.each do |restaurant|
   6.times do
