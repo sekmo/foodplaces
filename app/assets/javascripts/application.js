@@ -14,19 +14,3 @@
 //= require jquery
 //= require turbolinks
 //= require_tree .
-
-// function addDishForm(link, content) {
-//   var new_id = new Date().getTime();
-//   var regexp = new RegExp("new_dishes", "g")
-//   $(link).parent().before(content.replace(regexp, new_id));
-// }
-
-document.addEventListener('turbolinks:load', function() {
-  $('#add-dish-link').on('click', function(event) {
-    event.preventDefault();
-    fields = $(this).attr('data-fields');
-    var new_id = new Date().getTime();
-    var regexp = new RegExp('new_dishes', 'g');
-    $(this).before(fields.replace(regexp, new_id));
-  });
-});

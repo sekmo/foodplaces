@@ -8,7 +8,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <!-- <body class="<%= controller_name %> <%= action_name %>"> -->
+  <%= content_tag :body, data: {action: action_name, controller: controller_name} do %>
     <header class="header">
       <div class="header__inner wrapper">
         <%= link_to 'FoodPlaces', root_path, class: "site-title" %>
@@ -28,5 +29,5 @@
     <main class="wrapper">
       <%= yield %>
     </main>
-  </body>
+  <% end %>
 </html>
