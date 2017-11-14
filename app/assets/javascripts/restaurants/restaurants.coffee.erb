@@ -1,5 +1,6 @@
 @initMap = ->
   if(page.controller() == 'restaurants')
+    infoWindow = new (google.maps.InfoWindow)
     if(page.action() == 'show')
       restaurantLocation =
         lat: $('#restaurant-map').data("lat")
@@ -7,7 +8,7 @@
       map = new(google.maps.Map) $('#restaurant-map')[0],
         zoom: 18,
         center: restaurantLocation
-      marker = new(google.maps.Marker)
+      singleMarker = new(google.maps.Marker)
         position: restaurantLocation
         map: map
     if(page.action() == 'index')
@@ -24,6 +25,10 @@
             position: latLng
             map: map
             title: data.title
+          google.maps.event.addListener marker, 'click', ->
+            infoWindow.setOptions
+              content: data.title
+            infoWindow.open map, marker
 
 $(document).on 'turbolinks:load', ->
   if(page.controller() == 'restaurants')
@@ -34,6 +39,7 @@ $(document).on 'turbolinks:load', ->
         new_id = (new Date).getTime()
         regexp = new RegExp('new_dishes', 'g')
         $(this).before fields.replace(regexp, new_id)
+
     if (page.action() == 'index' || page.action() == 'show')
       if page.included_google_maps_js_api == undefined
         google_maps_api_key = '<%= Rails.application.secrets.google_maps_api_key %>'
