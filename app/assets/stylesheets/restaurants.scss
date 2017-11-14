@@ -1,6 +1,24 @@
-// Place all the styles related to the restaurants controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.restaurant-form {
+  .field {
+    margin-bottom: 10px;
+  }
+  input {
+    display: block;
+  }
+}
+
+.restaurant-dishes {
+  margin-top: 60px;
+  &-index {
+    list-style: none;
+    padding-left: 0;
+    & > li {
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
 
 .restaurant-info {
   float: left;
@@ -8,6 +26,40 @@
 
 #restaurant-map {
   margin-top: 20px;
+  width: 50%;
+  height: 500px;
+  float: right;
+}
+
+.restaurant-index {
+  width: 50%;
+  float: left;
+  list-style: none;
+  padding-left: 0;
+  & > a{
+    text-decoration: none;
+    color: inherit;
+    & > li{
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+  }
+
+  &__name {
+    font-weight: 600;
+    margin-bottom: -10px;
+  }
+  p.restaurant-index__kitchen-type,
+  p.restaurant-index__address {
+    font-size: .85em;
+  }
+  p.restaurant-index__address {
+    margin-bottom: 0;
+  }
+}
+
+#restaurants-map {
   width: 50%;
   height: 500px;
   float: right;
