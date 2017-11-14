@@ -1,0 +1,30 @@
+@initMap = ->
+  restaurantLocation =
+    lat: $('#restaurant-map').data("lat")
+    lng: $('#restaurant-map').data("lng")
+  map = new(google.maps.Map) $('#restaurant-map')[0],
+    zoom: 18,
+    center: restaurantLocation
+  marker = new(google.maps.Marker)
+    position: restaurantLocation
+    map: map
+
+# THIS WORKS
+$(document).on 'turbolinks:load', ->
+  if $('#restaurant-map').length > 0 && page.included_google_maps_js_api == undefined
+    google_maps_api_key = '<%= Rails.application.secrets.google_maps_api_key %>'
+    $.getScript('https://maps.googleapis.com/maps/api/js?key=' + google_maps_api_key + '&callback=initMap')
+    page.included_google_maps_js_api = true
+  else if ($('#restaurant-map').length > 0)
+    initMap()
+
+
+# $(document).on 'turbolinks:load', ->
+#   if $('#restaurant-map').length > 0
+#     if page.included_google_maps_js_api == undefined
+#       google_maps_api_key = '<%= Rails.application.secrets.google_maps_api_key %>'
+#       # the initMap is correctly called from here...
+#       $.getScript('https://maps.googleapis.com/maps/api/js?key=' + google_maps_api_key + '&callback=initMap')
+#       page.included_google_maps_js_api = true
+#     # but not from here...
+#     initMap() # Uncaught ReferenceError: google is not defined

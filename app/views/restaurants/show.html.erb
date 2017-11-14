@@ -1,21 +1,25 @@
 <%= link_to "Back to all restaurants", restaurants_path, class: 'back-link' %>
 
-<h1><%= @restaurant.name %></h1>
-<p><%= @restaurant.kitchen_type %></p>
-<p>Address: <%= @restaurant.address %></p>
-<%= link_to "Edit restaurant", edit_restaurant_path %>
+<div class="clearfix">
+  <div class="restaurant-info">
+    <h1><%= @restaurant.name %></h1>
+    <p><%= @restaurant.kitchen_type %></p>
+    <p>Address: <%= @restaurant.address %></p>
+    <%= link_to "Edit restaurant", edit_restaurant_path %>
+    <div class="restaurant-dishes">
+      <h2>Available dishes:</h2>
+      <ul class="restaurant-dishes-index">
+        <% @restaurant.dishes.each do |dish| %>
+        <li>
+          <span class="dish-name"><%= dish.name %></span> - <span class="dish-price">€<%= dish.price %></span>
+          <% if dish.gluten_free  %>
+            - <span class="gluten-free">Gluten free</span>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
 
-
-<div class="restaurant-dishes">
-  <h2>Available dishes:</h2>
-  <ul class="restaurant-dishes-index">
-    <% @restaurant.dishes.each do |dish| %>
-    <li>
-      <span class="dish-name"><%= dish.name %></span> - <span class="dish-price">€<%= dish.price %></span>
-      <% if dish.gluten_free  %>
-        - <span class="gluten-free">Gluten free</span>
-      <% end %>
-    </li>
-    <% end %>
-  </ul>
+  </div>
+  <%= content_tag :div, nil, id: "restaurant-map", data: {lat: @restaurant.latitude, lng: @restaurant.longitude} %>
 </div>
