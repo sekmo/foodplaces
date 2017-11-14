@@ -1,13 +1,16 @@
 <h1>All the restaurants</h1>
-
-<ul class="restaurant-index">
-  <% @restaurants.each do |restaurant| %>
-    <%= link_to restaurant_path(restaurant) do %>
-      <li>
-        <p class="restaurant-index__name"><%= restaurant.name %></p>
-        <p class="restaurant-index__kitchen-type"><%= restaurant.kitchen_type %></p>
-        <p class="restaurant-index__address"><%= restaurant.address %></p>
-      </li>
+<div class="clearfix">
+  <ul class="restaurant-index">
+    <% @restaurants.each do |restaurant| %>
+      <%= link_to restaurant_path(restaurant) do %>
+        <li>
+          <p class="restaurant-index__name"><%= restaurant.name %></p>
+          <p class="restaurant-index__kitchen-type"><%= restaurant.kitchen_type %></p>
+          <p class="restaurant-index__address"><%= restaurant.address %></p>
+        </li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
+  <div id="restaurants-map">
+  </div>
+</div>

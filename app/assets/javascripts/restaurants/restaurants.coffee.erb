@@ -1,0 +1,43 @@
+@initMap = ->
+  if(page.controller() == 'restaurants')
+    if(page.action() == 'show')
+      restaurantLocation =
+        lat: $('#restaurant-map').data("lat")
+        lng: $('#restaurant-map').data("lng")
+      map = new(google.maps.Map) $('#restaurant-map')[0],
+        zoom: 18,
+        center: restaurantLocation
+      marker = new(google.maps.Marker)
+        position: restaurantLocation
+        map: map
+    if(page.action() == 'index')
+      berlinCoordinates =
+        lat: 52.52000659999999
+        lng: 13.404954
+      map = new(google.maps.Map) $('#restaurants-map')[0],
+        zoom: 12,
+        center: berlinCoordinates
+      $.getJSON '/restaurants.json', (jsonData) ->
+        $.each jsonData, (key, data) ->
+          latLng = new(google.maps.LatLng)(data.latitude, data.longitude)
+          marker = new(google.maps.Marker)
+            position: latLng
+            map: map
+            title: data.title
+
+$(document).on 'turbolinks:load', ->
+  if(page.controller() == 'restaurants')
+    if (page.action() == 'new' || page.action() == 'edit')
+      $('#add-dish-link').on 'click', (e) ->
+        e.preventDefault()
+        fields = $(this).attr('data-fields')
+        new_id = (new Date).getTime()
+        regexp = new RegExp('new_dishes', 'g')
+        $(this).before fields.replace(regexp, new_id)
+    if (page.action() == 'index' || page.action() == 'show')
+      if page.included_google_maps_js_api == undefined
+        google_maps_api_key = '<%= Rails.application.secrets.google_maps_api_key %>'
+        $.getScript 'https://maps.googleapis.com/maps/api/js?key=' + google_maps_api_key + '&callback=initMap',
+          page.included_google_maps_js_api = true
+      else
+        initMap()
