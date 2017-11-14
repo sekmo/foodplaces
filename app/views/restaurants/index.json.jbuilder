@@ -1,5 +1,5 @@
 json.array! @restaurants do |restaurant|
-  json.lat restaurant.latitude
-  json.lng restaurant.longitude
+  json.latitude restaurant.latitude
+  json.longitude restaurant.longitude
   json.title restaurant.name
 end
