@@ -51,7 +51,7 @@ function initMap() {
 
 $(document).on('turbolinks:load', function () {
   if (page.controller() === 'restaurants') {
-    if (['new', 'edit'].includes(page.action())) {
+    if (page.action() === 'new' || page.action() === 'edit') {
       $('#add-dish-link').on('click', function (e) {
         e.preventDefault();
         var fields = $(this).attr('data-fields');
@@ -62,7 +62,7 @@ $(document).on('turbolinks:load', function () {
       return;
     }
 
-    if (['index', 'show'].includes(page.action())) {
+    if (page.action() === 'index' || page.action() === 'show') {
       if (page.included_google_maps_js_api === undefined) {
         var googleMapsApiKey = '<%= Rails.application.secrets.google_maps_api_key %>';
         $.getScript('https://maps.googleapis.com/maps/api/js?key=' + googleMapsApiKey +
