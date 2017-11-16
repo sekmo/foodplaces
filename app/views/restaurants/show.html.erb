@@ -19,7 +19,6 @@
         <% end %>
       </ul>
     </div>
-
   </div>
-  <%= content_tag :div, nil, id: "restaurant-map", data: {lat: @restaurant.latitude, lng: @restaurant.longitude} %>
+  <%= tag :div, class: "restaurant-map", data: {lat: @restaurant.latitude, lng: @restaurant.longitude} %>
 </div>

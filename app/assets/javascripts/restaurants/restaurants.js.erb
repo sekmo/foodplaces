@@ -1,39 +1,45 @@
 function initMap() {
-  if(page.controller() == 'restaurants') {
+  if (page.controller() === 'restaurants') {
     var infoWindow = new google.maps.InfoWindow();
-    if (page.action() == 'show') {
+    if (page.action() === 'show') {
       var restaurantLocation = {
-        lat: $('#restaurant-map').data("lat"),
-        lng: $('#restaurant-map').data("lng")
+        lat: $('.restaurant-map').data('lat'),
+        lng: $('.restaurant-map').data('lng'),
       };
-      var map = new google.maps.Map($('#restaurant-map')[0], {
+      var map = new google.maps.Map($('.restaurant-map')[0], {
         zoom: 18,
-        center: restaurantLocation
+        center: restaurantLocation,
       });
-      var marker = new google.maps.Marker({
+      new google.maps.Marker({
         position: restaurantLocation,
-        map: map
+        map: map,
       });
-    } else if (page.action() == 'index') {
+      return;
+    }
+    if (page.action() === 'index') {
       var berlinCoordinates = {
         lat: 52.52000659999999,
-        lng: 13.404954
+        lng: 13.404954,
       };
-      var map = new google.maps.Map($('#restaurants-map')[0], {
+      var map = new google.maps.Map($('.restaurants-map')[0], {
         zoom: 12,
-        center: berlinCoordinates
+        center: berlinCoordinates,
       });
-      $.getJSON('/restaurants.json', function(jsonData) {
-        $.each(jsonData, function(key, data) {
+      $.getJSON('/restaurants.json', function (jsonData) {
+        $.each(jsonData, function (key, data) {
           var latLng = new google.maps.LatLng(data.latitude, data.longitude);
           var marker = new google.maps.Marker({
             position: latLng,
             map: map,
-            title: data.title
+            title: data.name,
           });
-          google.maps.event.addListener(marker, 'click', function(){
+          var infoWindowContent =
+            '<div class="restaurants-map__info-window"><a href="/restaurants/' +
+              data.id + '"><h3>' + data.name + '</h3>' +
+              data.kitchenType + '</a></div>';
+          google.maps.event.addListener(marker, 'click', function () {
             infoWindow.setOptions({
-              content: "<strong>" + data.title + "</strong>"
+              content: infoWindowContent,
             });
             infoWindow.open(map, marker);
           });
@@ -43,25 +49,26 @@ function initMap() {
   }
 }
 
-$(document).on('turbolinks:load', function() {
-  if(page.controller() == 'restaurants'){
-    if (page.action() == 'new' || page.action() == 'edit') {
-      console.log('new edit');
-      $('#add-dish-link').on('click', function(e){
+$(document).on('turbolinks:load', function () {
+  if (page.controller() === 'restaurants') {
+    if (['new', 'edit'].includes(page.action())) {
+      $('#add-dish-link').on('click', function (e) {
         e.preventDefault();
         var fields = $(this).attr('data-fields');
-        var new_id = new Date().getTime();
+        var newId = new Date().getTime();
         var regexp = new RegExp('new_dishes', 'g');
-        $(this).before(fields.replace(regexp, new_id));
+        $(this).before(fields.replace(regexp, newId));
       });
-    } else if (page.action() == 'index' || page.action() == 'show') {
-      console.log('edit show');
-      if(page.included_google_maps_js_api === undefined) {
-        var google_maps_api_key = '<%= Rails.application.secrets.google_maps_api_key %>';
-        $.getScript('https://maps.googleapis.com/maps/api/js?key=' + google_maps_api_key
-          + '&callback=initMap', function() {
-            page.included_google_maps_js_api = true;
-          });
+      return;
+    }
+
+    if (['index', 'show'].includes(page.action())) {
+      if (page.included_google_maps_js_api === undefined) {
+        var googleMapsApiKey = '<%= Rails.application.secrets.google_maps_api_key %>';
+        $.getScript('https://maps.googleapis.com/maps/api/js?key=' + googleMapsApiKey +
+        '&callback=initMap', function () {
+          page.included_google_maps_js_api = true;
+        });
       } else {
         initMap();
       }
