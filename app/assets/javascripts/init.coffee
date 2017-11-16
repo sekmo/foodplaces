@@ -1,7 +1,6 @@
 class Page
   controller: () =>
-    $('body').data('controller')
+    $('meta[name=psj]').attr('controller')
   action: () =>
-    $('body').data('action')
-
+    $('meta[name=psj]').attr('action')
 @page = new Page
