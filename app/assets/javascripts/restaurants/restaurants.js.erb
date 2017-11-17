@@ -1,0 +1,72 @@
+function initMap() {
+  if (page.controller() === 'restaurants') {
+    if (page.action() === 'index') {
+      var map = new google.maps.Map($('.restaurants-map')[0], { zoom: 18 });
+      var infoWindow = new google.maps.InfoWindow();
+      var bounds = new google.maps.LatLngBounds();
+      $.getJSON('/restaurants.json', function (jsonData) {
+        $.each(jsonData, function (key, value) {
+          var latLng = new google.maps.LatLng(value.latitude, value.longitude);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            title: value.name,
+          });
+          bounds.extend(marker.getPosition());
+          var infoWindowContent =
+            '<div class="restaurants-map__info-window"><a href="/restaurants/' +
+              value.id + '"><h3>' + value.name + '</h3>' +
+              value.kitchenType + '</a></div>';
+          google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.setOptions({
+              content: infoWindowContent,
+            });
+            infoWindow.open(map, marker);
+          });
+        });
+        google.maps.event.addListenerOnce(map, 'bounds_changed', function () {
+          if (map.getZoom() > 15) { map.setZoom(15); }
+          map.setCenter(bounds.getCenter());
+        });
+        map.fitBounds(bounds);
+      });
+    } else if (page.action() === 'show') {
+      var restaurantLocation = {
+        lat: $('.restaurant-map').data('lat'),
+        lng: $('.restaurant-map').data('lng'),
+      };
+      map = new google.maps.Map($('.restaurant-map')[0], {
+        zoom: 18,
+        center: restaurantLocation,
+      });
+      new google.maps.Marker({
+        position: restaurantLocation,
+        map: map,
+      });
+    }
+  }
+}
+
+$(document).on('turbolinks:load', function () {
+  if (page.controller() === 'restaurants') {
+    if (page.action() === 'index' || page.action() === 'show') {
+      if (page.included_google_maps_js_api === undefined) {
+        var googleMapsApiKey = '<%= Rails.application.secrets.google_maps_api_key %>';
+        $.getScript('https://maps.googleapis.com/maps/api/js?key=' + googleMapsApiKey +
+        '&callback=initMap', function () {
+          page.included_google_maps_js_api = true;
+        });
+      } else {
+        initMap();
+      }
+    } else if (page.action() === 'new' || page.action() === 'edit') {
+      $('#add-dish-link').on('click', function (e) {
+        e.preventDefault();
+        var fields = $(this).attr('data-fields');
+        var newId = new Date().getTime();
+        var regexp = new RegExp('new_dishes', 'g');
+        $(this).before(fields.replace(regexp, newId));
+      });
+    }
+  }
+});
