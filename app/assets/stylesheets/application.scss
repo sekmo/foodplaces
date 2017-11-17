@@ -1,8 +1,12 @@
 /*
  *= require normalize
- *= require_tree .
+ * require_tree .
  *= require_self
  */
 
+@import "variables";
 @import "base";
+@import "utilities";
+@import "mixins";
 @import "modules";
+@import "restaurants";

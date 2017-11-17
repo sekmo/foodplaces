@@ -1,0 +1,14 @@
+// @include breakpoint-min($tablet){
+//   font-size: 1.1rem;
+// }
+@mixin breakpoint-min($points){
+  @media screen and (min-width: $points) {
+    @content;
+  }
+}
+
+@mixin breakpoint-max($points){
+  @media screen and (max-width: $points) {
+    @content;
+  }
+}

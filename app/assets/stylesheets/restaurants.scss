@@ -1,25 +1,41 @@
 .restaurants-index {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-left: -5px;
   list-style: none;
   padding-left: 0;
-  & > a{
-    text-decoration: none;
-    color: inherit;
-    & > li{
-      padding-bottom: 15px;
-      margin-bottom: 15px;
-      border-bottom: 1px solid #eee;
+  .restaurant-card {
+    display: inline-block;
+    min-height: 140px;
+    width: 100%;
+    @include breakpoint-min($tablet){
+      width: calc(100% / 3 - 10px);
     }
-  }
-  &__name {
-    font-weight: 600;
-    margin-bottom: -10px;
-  }
-  p.restaurant-index__kitchen-type,
-  p.restaurant-index__address {
-    font-size: .85em;
-  }
-  p.restaurant-index__address {
-    margin-bottom: 0;
+    margin: 5px;
+    background: #f2f2f2;
+    &:hover {
+      background: #f8f8f8;
+    }
+    a {
+      display: block;
+      height: 100%;
+      padding: 25px;
+      padding-top: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+    &__name {
+      font-weight: bold;
+      margin-bottom: -10px;
+    }
+    &__kitchen-type,
+    &__address {
+      font-size: .85em;
+    }
+    &__address {
+      margin-bottom: 0;
+    }
   }
 }
 
