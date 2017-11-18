@@ -7,17 +7,19 @@
     <p>Address: <%= @restaurant.address %></p>
     <%= link_to "Edit restaurant", edit_restaurant_path %>
     <div class="restaurant-dishes">
-      <h2>Available dishes:</h2>
-      <ul class="restaurant-dishes-index">
-        <% @restaurant.dishes.each do |dish| %>
-        <li>
-          <span class="dish-name"><%= dish.name %></span> - <span class="dish-price">€<%= dish.price %></span>
-          <% if dish.gluten_free  %>
-            - <span class="gluten-free">Gluten free</span>
+      <% if @restaurant.dishes.any? %>
+        <h2>Available dishes:</h2>
+        <ul class="restaurant-dishes-index">
+          <% @restaurant.dishes.each do |dish| %>
+          <li>
+            <span class="dish-name"><%= dish.name %></span> - <span class="dish-price">€<%= dish.price %></span>
+            <% if dish.gluten_free  %>
+              - <span class="gluten-free">Gluten free</span>
+            <% end %>
+          </li>
           <% end %>
-        </li>
-        <% end %>
-      </ul>
+        </ul>
+      <% end %>
     </div>
   </div>
   <%= tag :div, class: "restaurant-map", data: {lat: @restaurant.latitude, lng: @restaurant.longitude} %>
