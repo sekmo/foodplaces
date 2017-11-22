@@ -8,9 +8,7 @@ RSpec.feature "Dishes", type: :feature do
     create(:dish, restaurant: hamburger_restaurant, name: "Busty Burger")
     create(:dish, restaurant: hamburger_restaurant, name: "Mighty Bagel")
     visit restaurants_path
-    restaurant_list_item = find("li", text: "Crusty burgers & Co.")
-    restaurant_link = restaurant_list_item.first(:xpath, ".//..")
-    restaurant_link.click
+    click_link("Crusty burgers & Co.")
     expect(page).to have_content "Crusty burgers & Co."
     expect(page).to have_content "Busty Burger"
     expect(page).to have_content "Mighty Bagel"
@@ -25,9 +23,7 @@ RSpec.feature "Dishes", type: :feature do
     fill_in "Price", with: "8"
     click_button "Create Restaurant"
     visit restaurants_path
-    restaurant_list_item = find("li", text: "Fishes and Co.")
-    restaurant_link = restaurant_list_item.first(:xpath, ".//..")
-    restaurant_link.click
+    click_link("Fishes and Co.")
     expect(page).to have_content "Fish and chips"
   end
 
@@ -46,9 +42,7 @@ RSpec.feature "Dishes", type: :feature do
     end
     click_button "Create Restaurant"
     visit restaurants_path
-    restaurant_list_item = find("li", text: "Fishes and Co.")
-    restaurant_link = restaurant_list_item.first(:xpath, ".//..")
-    restaurant_link.click
+    click_link("Fishes and Co.")
     expect(page).to have_content "Fish and chips"
   end
 end
