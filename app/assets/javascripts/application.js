@@ -13,4 +13,5 @@
 //= require rails-ujs
 //= require jquery
 //= require turbolinks
-//= require_tree .
+//= require init
+//= require restaurants/restaurants
