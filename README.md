@@ -4,9 +4,10 @@ A Rails app for managing your favorite restaurants.
 
 ## Feature specs
 - User gets a list of restaurants with name, address, and kitchen type
-- User gets a list of the dishes after clicking on a restaurant on index
-- User inserts new restaurants
-- User inserts new dishes
+- User sees a google maps view and can see restaurant details clicking on the markers
+- User gets a list of the dishes when opening the page of a restaurant
+- User can insert new restaurants
+- User can insert new dishes
 
 ## Domain model
 
@@ -25,9 +26,6 @@ The `dishes` association is a nested attribute for `Restaurant`.
 - gluten_free: boolean
 
 ## Next features
-
-- **Google Maps integration**
-Have a Google Maps view that shows the restaurants on a map.
 
 - **Restaurant reviews**
 Have the ability to leave a review to a restaurant, and see the average rating for every restaurant.
